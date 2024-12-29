@@ -1,7 +1,13 @@
-<?php include 'setting/system.php'; ?> 
-<?php include 'theme/head.php'; ?> 
-<?php include 'theme/sidebar.php'; ?> 
-<?php include 'session.php'; ?>
+<?php include base_path('/view/theme/head.php'); ?>
+<?php include base_path('/view/theme/sidebar.php'); ?>
+<?php include base_path('/view/theme/sidebar.php');?>
+
+<?php 
+if (!isset($_SESSION['id'])) {
+  header('Location: /login'); 
+  exit();
+}
+?>
 
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
   <header class="w3-container" style="padding-top:22px">
@@ -10,14 +16,11 @@
 
   <?php include 'inc/data.php'; ?>
 
-  <div class="w3-container" style="padding-top:22px">
+  <div class="w3-container w3-white" style="padding-top:22px; margin: 50px 20px;">
     <div class="w3-row">
-      
+    <h2 style="text-align: center; font-weight: bold; margin: 20px 0px;">Add New Pig</h2>
       <div class="col-md-6">
         <!-- Box styling -->
-        <div class="box" style="border: 1px solid #ddd; padding: 20px; border-radius: 5px; background-color: #f9f9f9;">
-          <h2 style="text-align: center;">Add New Pig</h2>
-
           <?php
           if (isset($_POST['submit'])) {
               if (isset($_FILES['pigphoto']['tmp_name'])) {
@@ -30,7 +33,7 @@
                   $n_gender = $_POST['gender'];
 
                   // Get the logged-in admin ID
-                  $admin_id = $_SESSION['id'];
+                  $admin_id = $_SESSION['admin_id'];
 
                   $res1_name = basename($_FILES['pigphoto']['name']);
                   $tmp_name = $_FILES['pigphoto']['tmp_name'];
@@ -53,7 +56,7 @@
 
               if ($insert) { 
                   // Redirect to manage-pig.php after successful addition
-                  header("Location: manage-pig.php");
+                  header("Location: /manage-pig");
                   exit;
               } else { ?>
                   <div class="alert alert-danger alert-dismissable">
@@ -101,8 +104,10 @@
                 <option value="sick">Sick</option>
               </select>
             </div>
+      </div>
 
-            <div class="form-group">
+      <div class="col-md-6">
+      <div class="form-group">
               <label class="control-label">Breed</label>
               <select name="breed" class="form-control" required>
                 <option value="" disabled selected>Select Breed</option>
@@ -127,9 +132,9 @@
 
             <button name="submit" type="submit" class="btn btn-sn" style="background-color: #007bff; color: white;">Add Pig</button>
           </form>
-        </div>
       </div>
     </div>
   </div>
 </div>
-<?php include 'theme/foot.php'; ?>
+
+<?php include base_path('/view/theme/foot.php'); ?>

@@ -3,9 +3,16 @@
 <?php include base_path('/view/theme/sidebar.php');?>
 
 <?php 
+if (!isset($_SESSION['id'])) {
+  header('Location: /login'); 
+  exit();
+}
+?>
+
+<?php 
 if (isset($_POST['submit'])) {
     $name = $_POST['breed'];
-    $admin_id = $_SESSION['id']; // Use the correct session key for admin's ID
+    $admin_id = $_SESSION['admin_id']; // Use the correct session key for admin's ID
 
     // Insert the breed with the admin_id
     $query = $db->query("INSERT INTO breed (name, admin_id) VALUES ('$name', '$admin_id')");
@@ -43,7 +50,7 @@ if (isset($_POST['submit'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $admin_id = $_SESSION['id']; // Use the correct session key for admin's ID
+                    $admin_id = $_SESSION['admin_id']; // Use the correct session key for admin's ID
                     $get = $db->query("SELECT * FROM breed WHERE admin_id = '$admin_id'"); // Only show breeds belonging to this admin
                     $res = $get->fetchAll(PDO::FETCH_OBJ);
                     $counter = 1; // Initialize a counter for numbering

@@ -1,11 +1,11 @@
-<?php include 'setting/system.php'; ?> 
-<?php include 'theme/head.php'; ?>
-<?php include 'theme/sidebar.php'; ?>
-<?php include 'session.php'; ?>
+<?php include base_path('/view/theme/head.php'); ?>
+<?php include base_path('/view/theme/sidebar.php'); ?>
+<?php include base_path('/view/theme/sidebar.php');?>
 
 <?php 
+
 if (!isset($_GET['pigno']) || empty($_GET['pigno'])) {
-    header('location: manage-pig.php');
+    header('location: /manage-pig');
     exit;
 } else {
     $pigno = $weight = $gender = $remark = $arr = $bname = $b_id = $health = $img = "";
@@ -13,7 +13,7 @@ if (!isset($_GET['pigno']) || empty($_GET['pigno'])) {
     $pigno = $_GET['pigno']; // Ensure pigno is set
 
     // Ensure only pigs from the logged-in admin are fetched
-    $admin_id = $_SESSION['id']; // Get the logged-in admin ID
+    $admin_id = $_SESSION['admin_id']; // Get the logged-in admin ID
 
     $query = $db->query("SELECT * FROM pigs WHERE pigno = '$pigno' AND admin_id = '$admin_id'");
     $fetchObj = $query->fetchAll(PDO::FETCH_OBJ);
@@ -38,7 +38,7 @@ if (!isset($_GET['pigno']) || empty($_GET['pigno'])) {
         }
     } else {
         // Redirect if the pig is not found or belongs to another admin
-        header('Location: manage-pig.php');
+        header('Location: /manage-pig');
         exit;
     }
 }
@@ -71,10 +71,8 @@ if (!isset($_GET['pigno']) || empty($_GET['pigno'])) {
                         $update_query = $db->query("UPDATE pigs SET pigno = '$n_pigno', weight = '$n_weight', date = '$n_date', breed_id = '$n_breed', remark = '$n_remark', health_status = '$n_status' WHERE pigno = '$n_pigno' AND admin_id = '$admin_id'");
 
                         if ($update_query) {
-                            echo '<div class="alert alert-success alert-dismissable">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Pig details successfully updated <i class="fa fa-check"></i></strong>
-                                  </div>';
+                                header("location: /manage-pig?message='Updated Successful'");
+                                die;
                         } else {
                             echo '<div class="alert alert-danger alert-dismissable">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -135,10 +133,10 @@ if (!isset($_GET['pigno']) || empty($_GET['pigno'])) {
                 <p class="text-justify text-center">
                     <?php echo htmlspecialchars($remark); ?>
                 </p>
-                <a class="btn btn-danger btn-md" onclick="return confirm('Continue delete pig ?')" href="delete.php?id=<?php echo htmlspecialchars($pigno) ?>"><i class="fa fa-trash"></i> Delete Pig</a>
+                <a class="btn btn-danger btn-md" onclick="return confirm('Continue delete pig ?')" href="/delete-pig?pigno=<?php echo htmlspecialchars($pigno) ?>"><i class="fa fa-trash"></i> Delete Pig</a>
             </div>
         </div>
     </div>
 </div>
 
-<?php include 'theme/foot.php'; ?>
+<?php include base_path('/view/theme/foot.php'); ?>

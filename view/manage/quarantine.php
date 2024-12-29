@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
     </div>
 
     <!-- Print Button (aligned right) -->
-    <div style="text-align: right; margin-top: 20px;">
+    <div style="text-align: right; margin-top: 20px; margin-right: 30px;">
         <button onclick="printTableData()" class="btn btn-primary">Print</button>
     </div>
 </div>

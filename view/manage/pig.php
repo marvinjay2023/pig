@@ -1,7 +1,16 @@
-
-<?php include base_path('/view/theme/head.php'); ?>
+<?php 
+include base_path('/view/theme/head.php'); ?>
 <?php include base_path('/view/theme/sidebar.php'); ?>
 <?php include base_path('/view/theme/sidebar.php');?>
+
+<?php 
+if (!isset($_SESSION['id'])) {
+  header('Location: /login'); 
+  exit();
+}
+
+
+?>
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;"> 
@@ -13,10 +22,14 @@
 
  <?php include 'inc/data.php'; ?>
 
+ <div class="alert alert-danger alert-fade">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error updating pig data. Please try again <i class="fa fa-times"></i></strong>
+</div>
  <div class="w3-container" style="padding-top:22px">
    <div class="w3-row">
      <h2>Manage Pigs</h2>
-     <a href="add-pig.php" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add New Pig</a><br><br>
+     <a href="/add-pig" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add New Pig</a><br><br>
      <div class="table-responsive">
        <table class="table table-hover table-striped" id="table">
          <thead>
@@ -65,9 +78,9 @@
                    <div class="dropdown">
                      <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog"></i> Option<span class="caret"></span></button>
                      <ul class="dropdown-menu">
-                       <li><a href="edit-pig.php?pigno=<?php echo $data->pigno ?>"><i class="fa fa-edit"></i> Edit</a></li>
-                       <li><a onclick="return confirm('Continue delete pig ?')" href="delete.php?pigno=<?php echo $data->pigno ?>"><i class="fa fa-trash"></i> Delete</a></li>
-                       <li><a onclick="return confirm('Continue quarantine pig ?')" href="quarantine.php?pigno=<?php echo $data->pigno; ?>"><i class="fa fa-paper-plane"></i> Quarantine Pig</a></li>
+                       <li><a href="/edit-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-edit"></i> Edit</a></li>
+                       <li><a onclick="return confirm('Continue delete pig ?')" href="/delete-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-trash"></i> Delete</a></li>
+                       <li><a onclick="return confirm('Continue quarantine pig ?')" href="/quarantine?pigno=<?php echo $data->pigno; ?>"><i class="fa fa-paper-plane"></i> Quarantine Pig</a></li>
                        <li><a onclick="return confirm('Mark this pig as sold?')" href="sold.php?pigno=<?php echo $data->pigno; ?>">
                        <i class="fa fa-dollar-sign" style="color: white;"></i> Sold</a></li>
                      </ul>

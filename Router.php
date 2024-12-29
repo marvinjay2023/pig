@@ -10,6 +10,11 @@ $routes = [
     '/manage-pig' => 'view/manage/pig.php',
     '/manage-quarantine' => 'view/manage/quarantine.php',
     '/manage-breed' => 'view/manage/breed.php',
+    '/add-pig' => 'view/manage/add.php',
+    '/edit-pig' => 'view/manage/edit.php',
+    '/delete-pig' => 'view/manage/delete.php',
+    '/delete-pig' => 'view/manage/delete.php',
+    '/quarantine' => 'view/manage/quarantine.php',
 
     '/monitor' => 'view/monitor.view.php',
 
