@@ -1,5 +1,5 @@
 <?php  
-//session_start();
+session_start();
 
 if (!isset($_SESSION['id'])) {
     header('Location: index.php'); 
@@ -9,7 +9,9 @@ if (!isset($_SESSION['id'])) {
 include 'setting/system.php';
 include 'theme/head.php';
 include 'theme/sidebar.php';
-include 'session.php';
+//include 'session.php';
+
+
 
 ?>
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">

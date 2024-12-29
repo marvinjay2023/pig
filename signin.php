@@ -9,45 +9,6 @@ include 'theme/head.php';
 <!-- Include Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<style>
-    
-    body {
-        background-image: url('img/baboy.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .btn-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .btn-custom {
-        background-color: blue;
-        color: white;
-        width: 48%;
-    }
-
-    .signup-box {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 71%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: #888;
-        font-size: 1.2em; /* Adjusts the icon size */
-    }
-</style>
-
 <div class="container">
     <div class="row" style="margin-top: 10%">
 

@@ -1,8 +1,11 @@
 <?php
+
 // Check if session is already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+
 
 // Replace with the actual admin ID from the session
 // Ensure the admin logs in and their ID is stored in the session during login
@@ -15,7 +18,7 @@ if (!isset($adminId)) {
 
 // Database connection setup (ensure proper credentials)
 try {
-    $db = new PDO('mysql:host=localhost;dbname=pig', 'root', ''); // Update credentials accordingly
+    $db = new PDO('mysql:host=localhost;dbname=pig', 'root', 'admin123'); // Update credentials accordingly
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());

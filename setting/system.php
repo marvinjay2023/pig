@@ -12,3 +12,12 @@ ob_start();
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+function dd($value){
+
+    echo '<pre>';
+    var_dump($value);
+    echo '</pre>';
+
+    die;
+}
