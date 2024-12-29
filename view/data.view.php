@@ -9,9 +9,11 @@ include 'theme/sidebar.php';
 //include 'session.php';
 ?>
 <style>
+        .w3-sidebar{
+            margin-top: 0px;
+        }
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
         }
         .container {
             max-width: 1200px;
@@ -22,14 +24,8 @@ include 'theme/sidebar.php';
             height: 400px;
             width: 100%;
         }
-        .home-button {
-            position: absolute;
-            left: 10;
-            top: 0;
-            z-index: 20;
-        }
 </style>
-<div class="w3-main" style="margin-left:300px;margin-top:50px;">
+<div class="w3-main" style="margin-left:300px; margin-top:80px;">
     <div class="container w3-white" style="padding: 32px 32px;">
         <h1 class="text-center mb-4">Real-Time Temperature and Humidity Data</h1>
 
