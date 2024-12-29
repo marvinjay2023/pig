@@ -28,3 +28,11 @@ function base_path($path){
 
 }
 
+function checkUrl($value){
+
+    $url = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+    return $url === $value;
+
+}
+

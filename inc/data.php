@@ -5,8 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
-
 // Replace with the actual admin ID from the session
 // Ensure the admin logs in and their ID is stored in the session during login
 $adminId = $_SESSION['admin_id'];

@@ -50,7 +50,7 @@ include 'theme/sidebar.php';
           </thead>
           <tbody>
             <?php
-            $admin_id = $_SESSION['id'];
+            $admin_id = $_SESSION['admin_id'];
 
             $recent_pigs = $db->prepare("
                 SELECT p.*, b.name AS breed_name 
@@ -62,7 +62,7 @@ include 'theme/sidebar.php';
             ");
             $recent_pigs->execute([$admin_id]);
             $pigs = $recent_pigs->fetchAll(PDO::FETCH_OBJ);
-
+            
             if ($pigs) {
                 foreach ($pigs as $pig) {
                     echo "<tr>
@@ -146,6 +146,7 @@ include 'theme/sidebar.php';
 
     // Function to print the table
     function printTable() {
+        
         var printWindow = window.open('', '', 'height=600,width=800');
         var tableContent = document.querySelector('#table').outerHTML;
 

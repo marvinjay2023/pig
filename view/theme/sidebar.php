@@ -53,17 +53,17 @@
         <h5>Menu</h5>
     </div>
     <div class="w3-bar-block">
-        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu">
+        <a href="#" class="bg-danger w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu">
             <i class="fa fa-remove fa-fw"></i> Close Menu
         </a>
-        <a href="/" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
-        <a href="/manage-pig" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
-        <a href="manage-breed" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> BREEDS</a>
-        <a href="/manage-quarantine" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
-        <a href="data.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">🌡️</span> ENVIRONMENT</a>
-        <a href="Monitor.php" class="w3-bar-item w3-button w3-padding">📷 MONITOR</a>
-        <a href="sold.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">🐷</span> Sold Pigs</a>
-        <a href="Reports.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">📝</span> REPORTS</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding <?= checkUrl('/')? 'w3-blue' : '' ?>"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
+        <a href="/manage-pig" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-pig')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
+        <a href="manage-breed" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-breed')? 'w3-blue' : '' ?>"><i class="fa fa-users fa-fw"></i> BREEDS</a>
+        <a href="/manage-quarantine" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-quarantine')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
+        <a href="/data" class="w3-bar-item w3-button w3-padding <?= checkUrl('/data')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">🌡️</span> ENVIRONMENT</a>
+        <a href="/monitor" class="w3-bar-item w3-button w3-padding <?= checkUrl('/monitor')? 'w3-blue' : '' ?>">📷 MONITOR</a>
+        <a href="/sold" class="w3-bar-item w3-button w3-padding <?= checkUrl('/sold')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">🐷</span> Sold Pigs</a>
+        <a href="/report" class="w3-bar-item w3-button w3-padding <?= checkUrl('/report')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">📝</span> REPORTS</a>
         <a href="logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off fa-fw"></i> LOG OUT</a><br><br>
     </div>
 </nav>

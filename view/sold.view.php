@@ -1,16 +1,8 @@
 <?php  
-include 'setting/system.php';
+
 include 'theme/head.php';
 include 'theme/sidebar.php';
 include 'session.php'; // session_start() should already be handled here
-
-// Connect to the database "pig"
-try {
-    $db = new PDO('mysql:host=localhost;dbname=pig;charset=utf8', 'root', '');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
 
 // Get the logged-in admin's group_id and admin_id from the session
 $admin_id = $_SESSION['admin_id'];

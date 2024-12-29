@@ -17,7 +17,12 @@
 
 <link rel="stylesheet" href="<?= !$_SESSION ? './plugin/custom.css' : '' ?>">
 
-
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ8v+M1K4YukJ2Fw82g6Pye2BsFX0MNWzzHHTDe25fpgmn3WzNB3lKvmtqLf" crossorigin="anonymous">
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 

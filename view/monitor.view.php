@@ -1,5 +1,5 @@
 <?php
-include 'setting/system.php'; // Ensure this includes the database connection
+
 include 'theme/head.php';
 include 'theme/sidebar.php';
 include 'session.php';

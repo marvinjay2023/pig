@@ -1,7 +1,13 @@
-<?php include 'setting/system.php'; ?>
-<?php include 'theme/head.php'; ?>
-<?php include 'theme/sidebar.php'; ?>
-<?php include 'session.php'; ?>
+<?php 
+
+if (!isset($_SESSION['id'])) {
+    header('Location: /login'); 
+    exit();
+}
+
+include 'theme/head.php';
+include 'theme/sidebar.php';
+?>
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">

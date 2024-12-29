@@ -34,7 +34,7 @@
          </thead>
          <tbody>
            <?php
-           $admin_id = $_SESSION['id'];
+           $admin_id = $_SESSION['admin_id'];
 
            $all_pig = $db->prepare("SELECT * FROM pigs WHERE is_deleted = 0 AND admin_id = ? ORDER BY pigno ASC");
            $all_pig->execute([$admin_id]);
