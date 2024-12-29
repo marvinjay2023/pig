@@ -1,8 +1,7 @@
-<?php include base_path('/view/theme/head.php'); ?>
-<?php include base_path('/view/theme/sidebar.php'); ?>
-<?php include base_path('/view/theme/sidebar.php');?>
-
 <?php 
+include 'theme/head.php';
+include 'theme/sidebar.php';
+
 if (!isset($_SESSION['id'])) {
   header('Location: /login'); 
   exit();
@@ -39,7 +38,7 @@ if (isset($_POST['submit'])) {
         <h2>Pig Breeds</h2>
         <div class="col-md-6">
             <a title="Check to delete from list" data-toggle="modal" data-target="#_removed" id="delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-            <form method="post" action="delete_breed.php">
+            <form method="post" action="/delete-breed">
             <table class="table table-hover table-bordered" id="table">
                 <thead>
                     <tr>
@@ -67,7 +66,27 @@ if (isset($_POST['submit'])) {
                     ?>
                 </tbody>
             </table>
-            <?php include('inc/modal-delete.php'); ?>
+                <div id="_removed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                <h3 class="modal-title">Remove From Breed List ?</h3>
+                                </div>
+
+                            <div class="modal-body">
+                                <div class="alert alert-danger">
+                                    <p>Are you sure you want to remove this Breed from the list?.</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i> Close</button>
+                                <button name="removed" class="btn btn-danger"><i class="fa fa-check"></i> Yes</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
             </form>
         </div>
 

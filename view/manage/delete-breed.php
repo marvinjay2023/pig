@@ -1,5 +1,4 @@
 <?php 
-include 'setting/system.php';
 
 if(isset($_POST['removed'])){
 	$id=$_POST['selector'];
@@ -8,6 +7,6 @@ if(isset($_POST['removed'])){
 	{
 		 $query = $db->query("DELETE FROM breed where id ='$id[$i]'");
 	}
-    header("location: manage-breed.php");
+    header("location: /manage-breed");
 }
 ?>
