@@ -14,7 +14,9 @@ $routes = [
     '/edit-pig' => 'view/manage/edit.php',
     '/delete-pig' => 'view/manage/delete.php',
     '/delete-pig' => 'view/manage/delete.php',
-    '/quarantine' => 'view/manage/quarantine.php',
+    
+    '/quarantine' => 'view/quarantine.view.php',
+    '/remove-quarantine' => 'view/manage/remove-quarantine.php',
 
     '/monitor' => 'view/monitor.view.php',
 

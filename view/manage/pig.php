@@ -80,7 +80,7 @@ if (!isset($_SESSION['id'])) {
                      <ul class="dropdown-menu">
                        <li><a href="/edit-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-edit"></i> Edit</a></li>
                        <li><a onclick="return confirm('Continue delete pig ?')" href="/delete-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-trash"></i> Delete</a></li>
-                       <li><a onclick="return confirm('Continue quarantine pig ?')" href="/quarantine?pigno=<?php echo $data->pigno; ?>"><i class="fa fa-paper-plane"></i> Quarantine Pig</a></li>
+                       <li><a onclick="return confirm('Continue quarantine pig ?')" href="/manage-quarantine?pigno=<?php echo $data->pigno; ?>"><i class="fa fa-paper-plane"></i> Quarantine Pig</a></li>
                        <li><a onclick="return confirm('Mark this pig as sold?')" href="sold.php?pigno=<?php echo $data->pigno; ?>">
                        <i class="fa fa-dollar-sign" style="color: white;"></i> Sold</a></li>
                      </ul>

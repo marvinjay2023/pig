@@ -59,7 +59,7 @@
         <a href="/" class="w3-bar-item w3-button w3-padding <?= checkUrl('/')? 'w3-blue' : '' ?>"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
         <a href="/manage-pig" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-pig')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
         <a href="manage-breed" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-breed')? 'w3-blue' : '' ?>"><i class="fa fa-users fa-fw"></i> BREEDS</a>
-        <a href="/manage-quarantine" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-quarantine')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
+        <a href="/quarantine" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-quarantine')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
         <a href="/data" class="w3-bar-item w3-button w3-padding <?= checkUrl('/data')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">🌡️</span> ENVIRONMENT</a>
         <a href="/monitor" class="w3-bar-item w3-button w3-padding <?= checkUrl('/monitor')? 'w3-blue' : '' ?>">📷 MONITOR</a>
         <a href="/sold" class="w3-bar-item w3-button w3-padding <?= checkUrl('/sold')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">🐷</span> Sold Pigs</a>

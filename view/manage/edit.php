@@ -1,6 +1,5 @@
 <?php include base_path('/view/theme/head.php'); ?>
 <?php include base_path('/view/theme/sidebar.php'); ?>
-<?php include base_path('/view/theme/sidebar.php');?>
 
 <?php 
 

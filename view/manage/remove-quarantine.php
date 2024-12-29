@@ -1,5 +1,4 @@
 <?php 
-include 'setting/system.php';
 
 if(isset($_POST['remove'])){
 	$id=$_POST['selector'];
@@ -8,6 +7,6 @@ if(isset($_POST['remove'])){
 	{
 		 $query = $db->query("DELETE FROM quarantine where id ='$id[$i]'");
 	}
-    header("location: manage-quarantine.php");
+    header("location: /quarantine");
 }
 ?>

@@ -1,35 +1,31 @@
+ 
+<?php include base_path('/view/theme/head.php'); ?>
+<?php include base_path('/view/theme/sidebar.php'); ?>
+
+
 <?php 
-include base_path('/view/theme/head.php');
-include base_path('/view/theme/sidebar.php');
-include base_path('/view/theme/sidebar.php');
 
-// Ensure the user is logged in
-if (!isset($_SESSION['admin_id'])) {
-    die('Access Denied. Please log in.');
-}
+if(!$_GET['pigno'] OR empty($_GET['pigno']) OR $_GET['pigno'] == '') {
+ 	header('location: /manage-pig');
+} else {
+ 	$pigno = $bname = $b_id = $health = "";
+ 	$pigno = (int)$_GET['pigno'];
+ 	$query = $db->query("SELECT * FROM pigs WHERE pigno = '$pigno' ");
+ 	$fetchObj = $query->fetchAll(PDO::FETCH_OBJ);
 
-$admin_id = $_SESSION['admin_id']; // Get the logged-in admin's ID
+ 	foreach($fetchObj as $obj) {
+       $pigno = $obj->pigno;
+	   $b_id = $obj->breed_id;
+	   $health = $obj->health_status;
 
-// Handle form submission for adding quarantine data
-if (isset($_POST['submit'])) {
-    $name = $_POST['quarantine_name'];
-    $description = $_POST['description'];
-
-    // Insert quarantine data with admin_id
-    $query = $db->prepare("INSERT INTO quarantine(name, description, admin_id) VALUES (:name, :description, :admin_id)");
-    $query->execute([
-        ':name' => $name,
-        ':description' => $description,
-        ':admin_id' => $admin_id
-    ]);
-
-    if ($query) {
-        echo "<script>alert('Quarantine Added!')</script>";
-        header('refresh: 1.5');
-    }
+	     $k = $db->query("SELECT * FROM breed WHERE id = '$b_id' ");
+       	 $ks = $k->fetchAll(PDO::FETCH_OBJ);
+       	 foreach ($ks as $r) {
+       	 	$bname = $r->name;
+       	 }
+ 	}
 }
 ?>
-
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
@@ -42,121 +38,94 @@ if (isset($_POST['submit'])) {
     <div class="w3-container" style="padding-top:22px">
         <div class="w3-row">
             <h2>Quarantine List</h2>
-            <div class="col-md-12">
-                <a title="Check to delete from list" data-toggle="modal" data-target="#_remove" id="delete" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                </a>
-                <form method="post" action="remove_quarantine.php">
-                    <table class="table table-hover" id="table">
-                        <thead>
+            <div class="col-md-6">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <tr>
+                            <th>Pig No</th>
+                            <th>Date quarantined</th>
+                            <th>Breed</th>
+                            <th>Vaccine</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $get = $db->query("SELECT * FROM quarantine");
+                        $res = $get->fetchAll(PDO::FETCH_OBJ);
+                        foreach($res as $n) { ?>
                             <tr>
-                                <th></th>
-                                <th>Pig No</th>
-                                <th>Date quarantined</th>
-                                <th>Breed</th>
-                                <th>Vaccine</th>
-                                <th>Reason</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Fetch quarantine data for the logged-in admin only
-                            $get = $db->prepare("SELECT * FROM quarantine WHERE admin_id = :admin_id");
-                            $get->execute([':admin_id' => $admin_id]);
-                            $res = $get->fetchAll(PDO::FETCH_OBJ);
+                                <td> <?php echo $n->pigno; ?> </td>
+                                <td> <?php echo $n->date; ?> </td>
+                                <td> <?php echo $n->breed; ?> </td>
+                                <td> <?php echo $n->vaccine; ?> </td>
+                                <td> <?php echo $n->reason; ?> </td>
+                            </tr> 
+                        <?php }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
-                            foreach ($res as $n) { ?>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="selector[]" value="<?php echo $n->id ?>">
-                                    </td>
-                                    <td><?php echo $n->pigno; ?></td>
-                                    <td><?php echo $n->date; ?></td>
-                                    <td><?php echo $n->breed; ?></td>
-                                    <td><?php echo $n->vaccine; ?></td>
-                                    <td><?php echo $n->reason; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+            <div class="col-md-6">
+                <?php
+                if(isset($_POST['submit'])) {
+                    $n_pigno = $_POST['pigno'];
+                    $n_breed = $_POST['breed'];
+                    $n_vaccine = $_POST['vaccine'];
+                    $n_remark = $_POST['reason'];
+                    $now = date('Y-m-d');
+                    $n_id = $_GET['pigno'];
+                    $admin_id = $_SESSION['admin_id'];
 
-                    <?php include('inc/modal-delete.php'); ?>
-                </form>
+                    $insert_query = $db->query("INSERT INTO quarantine(pigno, breed, vaccine, reason, date, admin_id) VALUES('$n_pigno', '$n_breed', '$n_vaccine', '$n_remark', '$now', '$admin_id')");
+
+                    if($insert_query) { ?>
+                    <div class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         <strong>Pig successfully quarantined <i class="fa fa-check"></i></strong>
+                    </div>
+                    <?php
+                    header('refresh: 3; url=/quarantine');
+                    } else { ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         <strong>Error inserting pig data. Please try again <i class="fa fa-times"></i></strong>
+                    </div>
+                    <?php
+                }
+                }
+                ?>
+
+                <!-- Box for form content -->
+                <div class="box" style="border: 1px solid #ddd; padding: 20px; border-radius: 5px; background-color: #f9f9f9;">
+                    <form role='form' method="post">
+                        <div class="form-group">
+                            <label class="control-label">Pig No</label>
+                            <input type="text" name="pigno" readonly="on" class="form-control" value="<?php echo $pigno; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Breed</label>
+                            <input type="text" name="breed" readonly="on" class="form-control" value="<?php echo $bname; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Vaccine</label>
+                            <textarea name="vaccine" placeholder="Enter vaccine details" class="form-control"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Reason</label>
+                            <textarea name="reason" placeholder="Enter reason for quarantine" class="form-control"></textarea>
+                        </div>
+
+                        <button name="submit" type="submit" class="btn btn-primary">Add to list</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Print Button (aligned right) -->
-    <div style="text-align: right; margin-top: 20px; margin-right: 30px;">
-        <button onclick="printTableData()" class="btn btn-primary">Print</button>
     </div>
 </div>
 
 <?php include base_path('/view/theme/foot.php'); ?>
-
-<!-- Add custom styles -->
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white; /* Set table background to white */
-}
-
-th, td {
-    border: 1px solid black; /* Black borders */
-    padding: 8px;
-    text-align: center; /* Center text in table cells */
-    color: black; /* Set text color to black */
-}
-
-th {
-    background-color: #f2f2f2; /* Header background */
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9; /* Light background for even rows */
-}
-
-/* Hide table controls */
-.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length {
-    display: none;
-}
-</style>
-
-<!-- Print Table Script -->
-<script>
-function printTableData() {
-    var printContent = document.querySelector('#table').outerHTML;
-
-    var printStyles = `
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-            color: black;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
-    `;
-
-    var newWindow = window.open('', '', 'width=800, height=600');
-    newWindow.document.write('<html><head><title>Print Table</title>');
-    newWindow.document.write(printStyles);  // Include the table styles
-    newWindow.document.write('</head><body>');
-    newWindow.document.write('<h2>Quarantine List</h2>'); // Optional title for printed page
-    newWindow.document.write(printContent);  // Include the table content
-    newWindow.document.write('</body></html>');
-    newWindow.document.close();
-    newWindow.print();
-}
-</script>
