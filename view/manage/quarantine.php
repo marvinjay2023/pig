@@ -1,8 +1,7 @@
 <?php 
-include 'setting/system.php';
-include 'theme/head.php';
-include 'theme/sidebar.php';
-include 'session.php';
+include base_path('/view/theme/head.php');
+include base_path('/view/theme/sidebar.php');
+include base_path('/view/theme/sidebar.php');
 
 // Ensure the user is logged in
 if (!isset($_SESSION['admin_id'])) {
@@ -93,7 +92,7 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 
-<?php include 'theme/foot.php'; ?>
+<?php include base_path('/view/theme/foot.php'); ?>
 
 <!-- Add custom styles -->
 <style>

@@ -1,16 +1,11 @@
 <?php 
 
-session_start(); // Start session to store user data
-
-// Include the necessary files
-include 'setting/system.php'; 
+// Include the necessary files 
 include 'theme/head.php'; 
-
-
 
 //Check if user is already logged in, then redirect
 if (isset($_SESSION['id'])) {
-    header('Location: dashboard.php');
+    header('Location: /');
     exit();
 }
 
@@ -43,7 +38,7 @@ if (isset($_SESSION['id'])) {
                     </div>
                     <div class="btn-container">
                         <button name="submit" type="submit" class="btn btn-md btn-custom">Log in</button>
-                        <a href="signin.php" class="btn btn-md btn-custom">Create Account</a>
+                        <a href="/signin" class="btn btn-md btn-custom">Create Account</a>
                     </div>
                     <br>
                 </form>
@@ -69,7 +64,7 @@ if (isset($_SESSION['id'])) {
                         $_SESSION['admin_id'] = $row->admin_id;
                         // Redirect to dashboard after login
 
-                        header('Location: dashboard.php');
+                        header('Location: /');
                         exit(); // Ensure no further code executes after the redirect
                     } else {
                         $error = 'Incorrect login details';

@@ -1,7 +1,6 @@
-<?php include 'setting/system.php'; ?>
-<?php include 'theme/head.php'; ?>
-<?php include 'theme/sidebar.php'; ?>
-<?php include 'session.php'; ?>
+<?php include base_path('/view/theme/head.php'); ?>
+<?php include base_path('/view/theme/sidebar.php'); ?>
+<?php include base_path('/view/theme/sidebar.php');?>
 
 <?php 
 if (isset($_POST['submit'])) {
@@ -82,7 +81,7 @@ if (isset($_POST['submit'])) {
      </div>
 </div>
 
-<?php include 'theme/foot.php'; ?>
+<?php include base_path('/view/theme/foot.php'); ?>
 
 <style>
 /* General table styling */

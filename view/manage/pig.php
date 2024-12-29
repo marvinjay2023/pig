@@ -1,7 +1,7 @@
-<?php include 'setting/system.php'; ?>   
-<?php include 'theme/head.php'; ?>
-<?php include 'theme/sidebar.php'; ?>
-<?php include 'session.php'; ?>
+
+<?php include base_path('/view/theme/head.php'); ?>
+<?php include base_path('/view/theme/sidebar.php'); ?>
+<?php include base_path('/view/theme/sidebar.php');?>
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;"> 
@@ -85,4 +85,4 @@
    </div>
  </div>
 
-<?php include 'theme/foot.php'; ?>
+<?php include base_path('/view/theme/foot.php'); ?>

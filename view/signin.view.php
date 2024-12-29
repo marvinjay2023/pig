@@ -2,7 +2,6 @@
 // Start session to store user data
 session_start(); 
 
-include 'setting/system.php';
 include 'theme/head.php'; 
 ?>
 

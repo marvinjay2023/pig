@@ -42,7 +42,7 @@
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
     <div class="w3-container w3-row">
         <div class="w3-col s4">
-            <img src="theme/default_avatar.jpg" class="w3-circle w3-margin-right" style="width:46px">
+            <img src="asset/default_avatar.jpg" class="w3-circle w3-margin-right" style="width:46px">
         </div>
         <div class="w3-col s8 w3-bar">
             <span>Welcome, <strong><?php echo ucwords($_SESSION['user']); ?></strong></span><br>
@@ -56,10 +56,10 @@
         <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu">
             <i class="fa fa-remove fa-fw"></i> Close Menu
         </a>
-        <a href="dashboard.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
-        <a href="manage-pig.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
-        <a href="manage-breed.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> BREEDS</a>
-        <a href="manage-quarantine.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
+        <a href="/manage-pig" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
+        <a href="manage-breed" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> BREEDS</a>
+        <a href="/manage-quarantine" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
         <a href="data.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">🌡️</span> ENVIRONMENT</a>
         <a href="Monitor.php" class="w3-bar-item w3-button w3-padding">📷 MONITOR</a>
         <a href="sold.php" class="w3-bar-item w3-button w3-padding"><span style="font-size: 1.2em;">🐷</span> Sold Pigs</a>

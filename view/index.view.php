@@ -1,15 +1,15 @@
 <?php  
-session_start();
+//session_start();
 
 if (!isset($_SESSION['id'])) {
-    header('Location: index.php'); 
+    header('Location: /login'); 
     exit();
 }
 
-include 'setting/system.php';
 include 'theme/head.php';
 include 'theme/sidebar.php';
 //include 'session.php';
+
 
 
 
