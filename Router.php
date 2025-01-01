@@ -27,6 +27,10 @@ $routes = [
     '/data' => 'view/data.view.php',
 
     '/report' => 'view/report.view.php',
+    '/week1' => 'view/week1.view.php',
+    '/week2' => 'view/week2.view.php',
+    '/week3' => 'view/week3.view.php',
+    '/week4' => 'view/week4.view.php',
 ];
 
 if(array_key_exists($uri, $routes)){

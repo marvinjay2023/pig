@@ -1,7 +1,9 @@
-<?php include 'setting/system.php'; ?>    
-<?php include 'theme/head.php'; ?>
-<?php include 'theme/sidebar.php'; ?>
-<?php include 'session.php'; ?>
+<?php 
+include 'theme/head.php';
+include 'theme/sidebar.php';
+
+?>    
+
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
@@ -11,7 +13,7 @@
   </header>
 
   <div class="w3-container" style="padding-top:22px">
-     <h2>Week 4 Data</h2>
+     <h2>Week 1 Data</h2>
 
      <div class="table-responsive">
         <table class="table table-hover table-striped" id="table" style="background-color: white; border: 1px solid black;">
@@ -28,9 +30,9 @@
               // Fetch the admin_id of the logged-in admin from the session
               $admin_id = $_SESSION['admin_id'];
 
-              // Set the date range for Week 4 (22nd to the last day of the current month)               
-              $start_date = date('Y-m-22'); // Start of the fourth week               
-              $end_date = date('Y-m-t'); // End of the month (last day of the current month)
+              // Set the date range for the first week of the current month
+              $start_date = date('Y-m-01'); // Start of the current month
+              $end_date = date('Y-m-07'); // End of the first week of the current month
 
               // Get the count of total pigs added each day within the week
               $pig_query = $db->prepare("SELECT date, COUNT(*) as total_pigs FROM pigs 

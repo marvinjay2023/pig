@@ -7,7 +7,7 @@ include 'session.php';
 // Function to fetch data from the thermal camera (e.g., an API or local endpoint)
 function getThermalData() {
     // Replace with the actual logic to get data from the thermal camera
-    $apiUrl = 'http://192.168.4.1/data'; // Replace with your thermal camera API URL
+    $apiUrl = 'http://192.168.43.19/ti-stream'; // Replace with your thermal camera API URL
     $response = file_get_contents($apiUrl);
 
     // Check for errors in the HTTP request
@@ -29,23 +29,23 @@ function getThermalData() {
 }
 
 // Check if data is being collected and posted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get data from the thermal camera
-    $thermalData = getThermalData();
-    $temperature = $thermalData['temperature'];
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     // Get data from the thermal camera
+//     $thermalData = getThermalData();
+//     $temperature = $thermalData['temperature'];
 
-    // Prepare and execute the database query to insert only temperature data
-    $query = "INSERT INTO thermal_data (temperature) VALUES (?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("d", $temperature); // 'd' for double
+//     // Prepare and execute the database query to insert only temperature data
+//     $query = "INSERT INTO thermal_data (temperature) VALUES (?)";
+//     $stmt = $conn->prepare($query);
+//     $stmt->bind_param("d", $temperature); // 'd' for double
 
-    if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>Data inserted successfully!</div>";
-    } else {
-        echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
-    }
-    $stmt->close();
-}
+//     if ($stmt->execute()) {
+//         echo "<div class='alert alert-success'>Data inserted successfully!</div>";
+//     } else {
+//         echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+//     }
+//     $stmt->close();
+// }
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Inner square containing the iframe -->
                 <div id="innerSquare">
                     <!-- Iframe loading the webpage -->
-                    <iframe src="http://tip.local"></iframe>
+                    <!-- <iframe src="http://192.168.1.100/ti-stream"></iframe> -->
+                    <img src="http://192.168.1.100/ti-stream" alt="thermal image" style="width: 100%; height: 100%;">
                 </div>
             </div>
 

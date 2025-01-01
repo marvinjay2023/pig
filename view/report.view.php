@@ -18,6 +18,7 @@ include 'theme/sidebar.php';
   </header>
 
   <?php include 'inc/data.php'; ?>
+
   <div class="w3-container" style="padding-top:22px">
     <div class="w3-row">
 
@@ -58,13 +59,13 @@ include 'theme/sidebar.php';
         button.addEventListener('click', function() {
             var weekNumber = this.getAttribute('data-week');
             if (weekNumber === '1') {
-                window.location.href = 'week1.php';
+                window.location.href = '/week1';
             } else if (weekNumber === '2') {
-                window.location.href = 'week2.php';
+                window.location.href = '/week2';
             } else if (weekNumber === '3') {
-                window.location.href = 'week3.php';
+                window.location.href = '/week3';
              } else if (weekNumber === '4') {
-                window.location.href = 'week4.php';
+                window.location.href = '/week4';
             } else {
                 // For other weeks, redirect to weeky.php with the selected week number
                 window.location.href = 'weeky.php?week=' + weekNumber;

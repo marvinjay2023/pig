@@ -2,7 +2,6 @@
 
 include 'theme/head.php';
 include 'theme/sidebar.php';
-include 'session.php'; // session_start() should already be handled here
 
 // Get the logged-in admin's group_id and admin_id from the session
 $admin_id = $_SESSION['admin_id'];
