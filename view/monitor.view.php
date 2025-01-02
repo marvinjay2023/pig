@@ -117,7 +117,7 @@ function getThermalData() {
                 <div id="innerSquare">
                     <!-- Iframe loading the webpage -->
                     <!-- <iframe src="http://192.168.1.100/ti-stream"></iframe> -->
-                    <img src="http://192.168.1.100/ti-stream" alt="thermal image" style="width: 100%; height: 100%;">
+                    <img src="http://192.168.1.101/ti-stream" alt="thermal image" style="width: 100%; height: 100%;">
                 </div>
             </div>
 
