@@ -4,10 +4,12 @@ include 'theme/head.php';
 include 'theme/sidebar.php';
 include 'session.php';
 
+$therma_image = 'http://tip.local/ti-stream';
+
 // Function to fetch data from the thermal camera (e.g., an API or local endpoint)
 function getThermalData() {
     // Replace with the actual logic to get data from the thermal camera
-    $apiUrl = 'http://192.168.43.19/ti-stream'; // Replace with your thermal camera API URL
+    $apiUrl = 'http://tip.local/ti-stream'; // Replace with your thermal camera API URL
     $response = file_get_contents($apiUrl);
 
     // Check for errors in the HTTP request
@@ -117,7 +119,7 @@ function getThermalData() {
                 <div id="innerSquare">
                     <!-- Iframe loading the webpage -->
                     <!-- <iframe src="http://192.168.1.100/ti-stream"></iframe> -->
-                    <img src="http://192.168.1.101/ti-stream" alt="thermal image" style="width: 100%; height: 100%;">
+                    <img src="<?= $therma_image ?>" alt="thermal image" style="width: 100%; height: 100%;">
                 </div>
             </div>
 
