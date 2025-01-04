@@ -7,6 +7,8 @@ if (!isset($_SESSION['id'])) {
   header('Location: /login'); 
   exit();
 }
+
+$errors = [];
 ?>
 
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
@@ -50,22 +52,28 @@ if (!isset($_SESSION['id'])) {
                   }
               }
 
-              // Insert the pig into the database including the admin_id
-              $insert = $db->query("INSERT INTO pigs(pigno, weight, date, breed_id, remark, health_status, img, gender, admin_id) 
+              try{
+                $insert = $db->query("INSERT INTO pigs(pigno, weight, date, breed_id, remark, health_status, img, gender, admin_id) 
                                     VALUES('$n_pigno', '$n_weight', '$n_date', '$n_breed', '$n_remark', '$n_status', '$path1', '$n_gender', '$admin_id')");
 
-              if ($insert) { 
-                  // Redirect to manage-pig.php after successful addition
-                  header("Location: /manage-pig");
-                  exit;
-              } else { ?>
-                  <div class="alert alert-danger alert-dismissable">
-                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                      <strong>Error creating pig data. Please try again <i class="fa fa-times"></i></strong>
-                  </div>
-              <?php }
+                if ($insert) { 
+                    // Redirect to manage-pig.php after successful addition
+                    header("Location: /manage-pig");
+                    exit;
+                }
+              }catch(PDOException){
+                $errors = 'ID already Used';
+              }
+
+              // Insert the pig into the database including the admin_id
           }
           ?>
+          <?php if(!empty($errors)):?>
+           <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong><?= $errors ?>. Please try again <i class="fa fa-times"></i></strong>
+          </div>
+          <?php endif; ?>
 
           <!-- Form for adding a new pig -->
           <form method="post" autocomplete="off" enctype="multipart/form-data">

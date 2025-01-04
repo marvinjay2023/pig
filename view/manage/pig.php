@@ -22,10 +22,6 @@ if (!isset($_SESSION['id'])) {
 
  <?php include 'inc/data.php'; ?>
 
- <div class="alert alert-danger alert-fade">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Error updating pig data. Please try again <i class="fa fa-times"></i></strong>
-</div>
  <div class="w3-container" style="padding-top:22px">
    <div class="w3-row">
      <h2>Manage Pigs</h2>
@@ -81,7 +77,7 @@ if (!isset($_SESSION['id'])) {
                        <li><a href="/edit-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-edit"></i> Edit</a></li>
                        <li><a onclick="return confirm('Continue delete pig ?')" href="/delete-pig?pigno=<?php echo $data->pigno ?>"><i class="fa fa-trash"></i> Delete</a></li>
                        <li><a onclick="return confirm('Continue quarantine pig ?')" href="/manage-quarantine?pigno=<?php echo $data->pigno; ?>"><i class="fa fa-paper-plane"></i> Quarantine Pig</a></li>
-                       <li><a onclick="return confirm('Mark this pig as sold?')" href="sold.php?pigno=<?php echo $data->pigno; ?>">
+                       <li><a onclick="return confirm('Mark this pig as sold?')" href="/sold?pigno=<?php echo $data->pigno; ?>">
                        <i class="fa fa-dollar-sign" style="color: white;"></i> Sold</a></li>
                      </ul>
                    </div> 

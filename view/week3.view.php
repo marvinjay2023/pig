@@ -22,6 +22,7 @@ include 'theme/sidebar.php';
                 <th>Total Pigs Added</th>
                 <th>Pigs Quarantined</th>
                 <th>Pigs Vaccinated</th>
+                <th>Pigs Sold</th>
             </tr>
           </thead>
           <tbody>
@@ -33,78 +34,104 @@ include 'theme/sidebar.php';
               $start_date = date('Y-m-15'); // Start of the third week              
               $end_date = date('Y-m-21'); // End of the third week
 
-              // Get the count of total pigs added each day within the week
-              $pig_query = $db->prepare("SELECT date, COUNT(*) as total_pigs FROM pigs 
-                                         WHERE date BETWEEN :start_date AND :end_date 
-                                         AND admin_id = :admin_id
-                                         GROUP BY date");
-              $pig_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
-              $pig_result = $pig_query->fetchAll(PDO::FETCH_OBJ);
+             // Get the count of total pigs added each day within the week
+             $pig_query = $db->prepare("SELECT date, COUNT(*) as total_pigs FROM pigs 
+             WHERE date BETWEEN :start_date AND :end_date 
+             AND admin_id = :admin_id
+             GROUP BY date");
+            $pig_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
+            $pig_result = $pig_query->fetchAll(PDO::FETCH_OBJ);
 
-              // Get the count of pigs quarantined each day within the week
-              $quarantine_query = $db->prepare("SELECT date, COUNT(*) as pigs_quarantined FROM quarantine 
-                                                WHERE date BETWEEN :start_date AND :end_date 
-                                                AND admin_id = :admin_id
-                                                GROUP BY date");
-              $quarantine_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
-              $quarantine_result = $quarantine_query->fetchAll(PDO::FETCH_OBJ);
+            // Get the count of pigs quarantined each day within the week
+            $quarantine_query = $db->prepare("SELECT date, COUNT(*) as pigs_quarantined FROM quarantine 
+                                WHERE date BETWEEN :start_date AND :end_date 
+                                AND admin_id = :admin_id
+                                GROUP BY date");
+            $quarantine_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
+            $quarantine_result = $quarantine_query->fetchAll(PDO::FETCH_OBJ);
 
-              // Get the count of pigs vaccinated each day within the week
-              $vaccine_query = $db->prepare("SELECT date, COUNT(*) as pigs_vaccinated FROM quarantine 
-                                             WHERE vaccine IS NOT NULL 
-                                             AND date BETWEEN :start_date AND :end_date 
-                                             AND admin_id = :admin_id
-                                             GROUP BY date");
-              $vaccine_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
-              $vaccine_result = $vaccine_query->fetchAll(PDO::FETCH_OBJ);
+            // Get the count of pigs vaccinated each day within the week
+            $vaccine_query = $db->prepare("SELECT date, COUNT(*) as pigs_vaccinated FROM quarantine 
+                            WHERE vaccine IS NOT NULL 
+                            AND date BETWEEN :start_date AND :end_date 
+                            AND admin_id = :admin_id
+                            GROUP BY date");
+            $vaccine_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
+            $vaccine_result = $vaccine_query->fetchAll(PDO::FETCH_OBJ);
 
-              // Merge data by date
-              $merged_data = [];
-              
-              foreach ($pig_result as $pig_data) {
-                  $merged_data[$pig_data->date] = [
-                      'total_pigs' => $pig_data->total_pigs,
-                      'pigs_quarantined' => 0,
-                      'pigs_vaccinated' => 0
-                  ];
-              }
+            // Get the count of pigs Sold each day within the week
+            $sold_query = $db->prepare("SELECT date, COUNT(*) as pigs_sold FROM sold_pigs 
+                            WHERE date IS NOT NULL 
+                            AND date BETWEEN :start_date AND :end_date 
+                            AND admin_id = :admin_id
+                            GROUP BY date");
+            $sold_query->execute([':start_date' => $start_date, ':end_date' => $end_date, ':admin_id' => $admin_id]);
+            $sold_result = $sold_query->fetchAll(PDO::FETCH_OBJ);
 
-              foreach ($quarantine_result as $quarantine_data) {
-                  if (!isset($merged_data[$quarantine_data->date])) {
-                      $merged_data[$quarantine_data->date] = [
-                          'total_pigs' => 0,
-                          'pigs_quarantined' => $quarantine_data->pigs_quarantined,
-                          'pigs_vaccinated' => 0
-                      ];
-                  } else {
-                      $merged_data[$quarantine_data->date]['pigs_quarantined'] = $quarantine_data->pigs_quarantined;
-                  }
-              }
+            // Merge data by date
+            $merged_data = [];
 
-              foreach ($vaccine_result as $vaccine_data) {
-                  if (!isset($merged_data[$vaccine_data->date])) {
-                      $merged_data[$vaccine_data->date] = [
-                          'total_pigs' => 0,
-                          'pigs_quarantined' => 0,
-                          'pigs_vaccinated' => $vaccine_data->pigs_vaccinated
-                      ];
-                  } else {
-                      $merged_data[$vaccine_data->date]['pigs_vaccinated'] = $vaccine_data->pigs_vaccinated;
-                  }
-              }
+            foreach ($pig_result as $pig_data) {
+            $merged_data[$pig_data->date] = [
+            'total_pigs' => $pig_data->total_pigs,
+            'pigs_quarantined' => 0,
+            'pigs_vaccinated' => 0,
+            'pigs_sold' => 0
+            ];
+            }
 
-              // Display merged data in the table
-              foreach ($merged_data as $date => $data) {
-                  echo "<tr>";
-                  echo "<td>" . $date . "</td>";
-                  echo "<td>" . $data['total_pigs'] . "</td>";
-                  echo "<td>" . $data['pigs_quarantined'] . "</td>";
-                  echo "<td>" . $data['pigs_vaccinated'] . "</td>";
-                  echo "</tr>";
-              }
+            foreach ($quarantine_result as $quarantine_data) {
+            if (!isset($merged_data[$quarantine_data->date])) {
+            $merged_data[$quarantine_data->date] = [
+            'total_pigs' => 0,
+            'pigs_quarantined' => $quarantine_data->pigs_quarantined,
+            'pigs_vaccinated' => 0,
+            'pigs_sold' => 0
+            ];
+            } else {
+            $merged_data[$quarantine_data->date]['pigs_quarantined'] = $quarantine_data->pigs_quarantined;
+            }
+            }
+
+            foreach ($vaccine_result as $vaccine_data) {
+            if (!isset($merged_data[$vaccine_data->date])) {
+            $merged_data[$vaccine_data->date] = [
+            'total_pigs' => 0,
+            'pigs_quarantined' => 0,
+            'pigs_vaccinated' => $vaccine_data->pigs_vaccinated,
+            'pigs_sold' => 0
+            ];
+            } else {
+            $merged_data[$vaccine_data->date]['pigs_vaccinated'] = $vaccine_data->pigs_vaccinated;
+            }
+            }
+
+            foreach ($sold_result as $sold_data) {
+            if (!isset($merged_data[$sold_data->date])) {
+            $merged_data[$sold_data->date] = [
+            'total_pigs' => 0,
+            'pigs_quarantined' => 0,
+            'pigs_vaccinated' => 0,
+            'pigs_sold' => $sold_data->pigs_sold
+            ];
+            } else {
+            $merged_data[$sold_data->date]['pigs_sold'] = $sold_data->pigs_sold;
+            }
+            }
+
+            // Display merged data in the table
+            foreach ($merged_data as $date => $data) {
+            echo "<tr>";
+            echo "<td>" . $date . "</td>";
+            echo "<td>" . $data['total_pigs'] . "</td>";
+            echo "<td>" . $data['pigs_quarantined'] . "</td>";
+            echo "<td>" . $data['pigs_vaccinated'] . "</td>";
+            echo "<td>" . $data['pigs_sold'] . "</td>";
+            echo "</tr>";
+            }
             ?>
-          </tbody>
-        </table>
+            </tbody>
+            </table>
 
         <!-- Print Button -->
         <div style="text-align: right; margin-top: 20px;">

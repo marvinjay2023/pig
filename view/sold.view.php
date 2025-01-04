@@ -20,7 +20,8 @@ if (isset($_GET['pigno'])) {
 
     // Fetch the pig's data
     $pig = $db->query("SELECT * FROM pigs WHERE pigno = '$pigno' AND is_deleted = 0")->fetch(PDO::FETCH_OBJ);
-
+    $date_sold = date('Y-m-d');
+    
     if ($pig) {
         // Move data to 'sold_pigs' table, including group_id
         $insertSold = $db->prepare("INSERT INTO sold_pigs (pigno, breed_id, weight, gender, health_status, date, remark, img, admin_id) 
@@ -31,7 +32,7 @@ if (isset($_GET['pigno'])) {
             $pig->weight,
             $pig->gender,
             $pig->health_status,
-            $pig->date,
+            $pig->date = $date_sold,
             $pig->remark,
             $pig->img,
             $admin_id // Add admin_id when inserting
@@ -64,7 +65,7 @@ $sold_pigs = $db->query("SELECT * FROM sold_pigs WHERE admin_id = '$admin_id' OR
             <th>Weight</th>
             <th>Gender</th>
             <th>Health Status</th>
-            <th>Date</th>
+            <th>Date Sold</th>
             <th>Desc.</th>
           </tr>
         </thead>
