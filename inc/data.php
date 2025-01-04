@@ -37,7 +37,7 @@ $que = $db->prepare("SELECT * FROM quarantine WHERE admin_id = ?");
 $que->execute([$adminId]);
 $qCount = $que->rowCount();
 
-$qu = $db->prepare("SELECT * FROM admin WHERE id = ?");
+$qu = $db->prepare("SELECT * FROM admin WHERE admin_id = ?");
 $qu->execute([$adminId]);
 $uCount = $qu->rowCount();
 

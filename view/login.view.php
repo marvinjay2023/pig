@@ -4,7 +4,7 @@
 include 'theme/head.php'; 
 
 //Check if user is already logged in, then redirect
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['admin_id'])) {
     header('Location: /');
     exit();
 }
@@ -52,13 +52,12 @@ if (isset($_SESSION['id'])) {
 
                     $count = $q->rowCount();
                     $rows = $q->fetchAll(PDO::FETCH_OBJ);
-                    
+
                     if ($count > 0) {
                         $row = $rows[0]; // Get the first result
                         // Store user data in session
-                        $_SESSION['id'] = $row->id;
-                        $_SESSION['user'] = $row->username;
                         $_SESSION['admin_id'] = $row->admin_id;
+                        $_SESSION['user'] = $row->username;
                         // Redirect to dashboard after login
 
                         header('Location: /');

@@ -3,7 +3,7 @@ session_start();
 include 'setting/system.php';
 
 // Check if the logged-in user is an admin
-if (isset($_SESSION['id']) && $_SESSION['id'] == 1) { // Assuming admin has id = 1
+if (isset($_SESSION['admin_id']) && $_SESSION['admin_id'] == 1) { // Assuming admin has id = 1
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $db->query("DELETE FROM admin WHERE id != 1");
         $db->query("DELETE FROM breed WHERE user_id != 1");

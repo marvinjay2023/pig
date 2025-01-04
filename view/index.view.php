@@ -1,6 +1,6 @@
 <?php  
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['admin_id'])) {
     header('Location: /login'); 
     exit();
 }
