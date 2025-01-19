@@ -56,7 +56,7 @@
         <a href="#" class="bg-danger w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu">
             <i class="fa fa-remove fa-fw"></i> Close Menu
         </a>
-        <a href="/" class="w3-bar-item w3-button w3-padding <?= checkUrl('/')? 'w3-blue' : '' ?>"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
+        <a href="/" class="w3-bar-item w3-button w3-padding <?= checkUrl('/') ? 'w3-blue' : '' ?>"><i class="fa fa-home fa-fw"></i> DASHBOARD</a>
         <a href="/manage-pig" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-pig')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em; color: black;">🐷</span> PIGS</a>
         <a href="/manage-breed" class="w3-bar-item w3-button w3-padding <?= checkUrl('/manage-breed')? 'w3-blue' : '' ?>"><i class="fa fa-users fa-fw"></i> BREEDS</a>
         <a href="/quarantine" class="w3-bar-item w3-button w3-padding <?= checkUrl('/quarantine')? 'w3-blue' : '' ?>"><span style="font-size: 1.2em;">💎</span> QUARANTINE</a>
@@ -69,7 +69,7 @@
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer; z-index:2;" title="close side menu" id="myOverlay"></div>
 
 <script>
 function w3_open() {
@@ -82,6 +82,7 @@ function w3_close() {
     document.getElementById("myOverlay").style.display = "none";
 }
 </script>
+
 
 </body>
 </html>
