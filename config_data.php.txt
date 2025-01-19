@@ -1,0 +1,24 @@
+<?php 
+define('DB_HOST'    , 'sql207.infinityfree.com'); 
+define('DB_USERNAME', 'if0_38035763'); 
+define('DB_PASSWORD', 'cm3vKBrjp8J'); 
+define('DB_NAME'    , 'if0_38035763_pig');
+
+define('POST_DATA_URL', 'https://pig-farm.infy.uk/save_data.php');
+
+//PROJECT_API_KEY is the exact duplicate of, PROJECT_API_KEY in NodeMCU sketch file
+//Both values must be same
+define('PROJECT_API_KEY', 'pigfarm2025');
+
+
+//set time zone for your country
+date_default_timezone_set('Asia/Singapore');
+
+// Connect with the database 
+$db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME); 
+ 
+// Display error if failed to connect 
+if ($db->connect_errno) { 
+    echo "Connection to database is failed: ".$db->connect_error;
+    exit();
+}

@@ -48,8 +48,8 @@ include 'theme/sidebar.php';
     </div>
 
     <!-- Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-8eZtQF9SoXn3IoD8V4zV92g6ygaytYlfQFshx88yAYq6z2aZZ4vPOMjXY8HYfbr6" crossorigin="anonymous"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-8eZtQF9SoXn3IoD8V4zV92g6ygaytYlfQFshx88yAYq6z2aZZ4vPOMjXY8HYfbr6" crossorigin="anonymous"></script>
+     -->
     <script>
         // Initialize arrays to store the real-time data
         let temperatureData = [];
